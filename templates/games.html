@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cyber Games | Cyber Awareness Month 2026
+{% endblock %}
+
+{% block content %}
+
+<section class="games-page">
+
+    <div class="games-header">
+
+        <span class="games-badge">
+            🎮 CYBER GAMES
+        </span>
+
+        <h1>
+            Learn Cybersecurity Through Games
+        </h1>
+
+        <p>
+            Test your knowledge, earn points, and improve your cybersecurity skills.
+        </p>
+
+    </div>
+
+
+    <div class="games-grid">
+
+        {% for game_id, game in games.items() %}
+
+        <article class="game-card">
+
+            <div class="game-icon">
+                {{ game.icon }}
+            </div>
+
+            <div class="game-content">
+
+                <span class="game-level">
+                    {{ game.category }}
+                </span>
+
+                <h2>
+                    {{ game.title }}
+                </h2>
+
+                <p>
+                    {{ game.description }}
+                </p>
+
+                <div class="game-info">
+                    <span>
+                        🧠 {{ game.questions|length }} Questions
+                    </span>
+
+                    <span>
+                        ⭐ Points
+                    </span>
+                </div>
+
+                <a
+                    href="{{ url_for('games.play_game', game_id=game_id) }}"
+                    class="game-button"
+                >
+                    Play Game →
+                </a>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
