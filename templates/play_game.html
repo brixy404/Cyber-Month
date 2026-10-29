@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ game.title }} | Cyber Awareness Month 2026
+{% endblock %}
+
+{% block content %}
+
+<section
+    class="game-play-page"
+    data-game-id="{{ game_id }}"
+>
+
+    <div class="game-top">
+
+        <a
+            href="{{ url_for('games.games_home') }}"
+            class="back-button"
+        >
+            ← Back to Games
+        </a>
+
+        <div class="game-title-area">
+
+            <span class="game-big-icon">
+                {{ game.icon }}
+            </span>
+
+            <div>
+
+                <span class="game-level">
+                    {{ game.category }}
+                </span>
+
+                <h1>
+                    {{ game.title }}
+                </h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="game-progress-area">
+
+        <div class="game-progress-info">
+
+            <span id="question-number">
+                Question 1 of {{ game.questions|length }}
+            </span>
+
+            <span id="score-display">
+                ⭐ Score: 0
+            </span>
+
+        </div>
+
+        <div class="game-progress">
+
+            <div
+                id="game-progress-bar"
+                class="game-progress-bar"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="question-card"
+        id="question-card"
+    >
+
+        <div class="question-number">
+            QUESTION
+            <span id="current-number">1</span>
+        </div>
+
+
+        <h2 id="question-text">
+            Loading question...
+        </h2>
+
+
+        <div
+            id="choices-container"
+            class="choices-container"
+        ></div>
+
+
+        <div
+            id="explanation"
+            class="explanation hidden"
+        ></div>
+
+
+        <button
+            id="next-button"
+            class="next-button hidden"
+            type="button"
+        >
+            Next Question →
+        </button>
+
+    </div>
+
+
+    <div
+        id="game-result"
+        class="game-result hidden"
+    >
+
+        <div class="result-icon">
+            🏆
+        </div>
+
+
+        <h2>
+            Game Complete!
+        </h2>
+
+
+        <p>
+            Great work! You completed the challenge.
+        </p>
+
+
+        <div class="final-score">
+
+            <span>
+                Your Score
+            </span>
+
+            <strong id="final-score">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="result-actions">
+
+            <button
+                id="restart-button"
+                class="game-button"
+                type="button"
+            >
+                🔄 Play Again
+            </button>
+
+
+            <a
+                href="{{ url_for('games.games_home') }}"
+                class="secondary-game-button"
+            >
+                🎮 More Games
+            </a>
+
+
+            <a
+                href="{{ url_for('leaderboard') }}"
+                class="secondary-game-button"
+            >
+                🏆 Leaderboard
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script
+    id="game-data"
+    type="application/json"
+>
+{{ game.questions | tojson }}
+</script>
+
+
+<script
+    src="{{ url_for('static', filename='js/games.js') }}"
+></script>
+
+{% endblock %}
