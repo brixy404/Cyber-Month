@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+    {% block title %}
+    Cyber Awareness Month 2026
+    {% endblock %}
+</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}"
+>
+
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+
+<nav class="navbar">
+
+    <a href="{{ url_for('index') }}" class="brand">
+
+        <img
+            src="{{ url_for('static', filename='images/acp-logo.png') }}"
+            alt="African Child Projects Logo"
+            class="acp-logo"
+        >
+
+        <span class="brand-text">
+            <strong>African Child Projects</strong>
+            <small>Cyber Awareness Month 2026</small>
+        </span>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('leaderboard') }}">
+            Leaderboard
+        </a>
+        <a href="{{ url_for('games.games_home') }}">
+            🎮 Games
+        </a>
+
+        {% if current_user.is_authenticated %}
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="nav-button">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+            <a href="{{ url_for('register') }}" class="nav-button">
+                Join Now
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     FLASH MESSAGES
+     ========================================================= -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for category, message in messages %}
+
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<!-- =========================================================
+     MAIN CONTENT
+     ========================================================= -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer class="footer">
+
+    <div>
+        <strong>African Child Projects</strong>
+
+        <p>
+            Cyber Awareness Month 2026
+        </p>
+    </div>
+
+    <div>
+        <p>
+            Learn. Investigate. Defend.
+        </p>
+
+        <p>
+            Stay safe. Think before you click.
+        </p>
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/main.js') }}"
+></script>
+
+</body>
+</html>
