@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cyber Awareness Month 2026
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            🛡️ OCTOBER 2026
+        </div>
+
+        <h1>
+            Cyber Awareness
+            <span>Month 2026</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Learn cybersecurity by playing, investigating,
+            solving challenges and defending digital environments.
+        </p>
+
+        <div class="hero-actions">
+
+            {% if current_user.is_authenticated %}
+
+                <a
+                    href="{{ url_for('dashboard') }}"
+                    class="button primary"
+                >
+                    Open My Dashboard
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{{ url_for('register') }}"
+                    class="button primary"
+                >
+                    Start Your Journey
+                </a>
+
+                <a
+                    href="{{ url_for('login') }}"
+                    class="button secondary"
+                >
+                    Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="cyber-orb">
+
+            <div class="orb-icon">
+                🛡️
+            </div>
+
+            <span class="orb-label">
+                LEARN
+            </span>
+
+            <span class="orb-label">
+                PLAY
+            </span>
+
+            <span class="orb-label">
+                DEFEND
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">
+            YOUR DIGITAL JOURNEY
+        </span>
+
+        <h2>
+            Explore the missions
+        </h2>
+
+        <p>
+            Complete cybersecurity missions, earn points
+            and build practical digital safety skills.
+        </p>
+
+    </div>
+
+
+    <div class="mission-grid">
+
+        {% for mission in missions %}
+
+            <article class="mission-card">
+
+                <div class="mission-icon">
+                    {{ mission.icon }}
+                </div>
+
+                <div>
+
+                    <h3>
+                        {{ mission.name }}
+                    </h3>
+
+                    <p>
+                        {{ mission.description }}
+                    </p>
+
+                </div>
+
+                <div class="mission-footer">
+
+                    <span>
+                        {{ mission.points }} points
+                    </span>
+
+                    <span class="locked-label">
+                        Coming soon
+                    </span>
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<section class="feature-section">
+
+    <div class="feature-card">
+
+        <span class="feature-icon">
+            🎮
+        </span>
+
+        <h3>
+            Learn through games
+        </h3>
+
+        <p>
+            Cybersecurity doesn't have to be boring.
+            Our upcoming interactive challenges will
+            turn security awareness into a game.
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <span class="feature-icon">
+            🕵️
+        </span>
+
+        <h3>
+            Investigate incidents
+        </h3>
+
+        <p>
+            Solve fictional cyber incidents by examining
+            digital clues, messages, logs and evidence.
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <span class="feature-icon">
+            🏆
+        </span>
+
+        <h3>
+            Earn points
+        </h3>
+
+        <p>
+            Complete missions, collect points and
+            see your progress on the leaderboard.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
