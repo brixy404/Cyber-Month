@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+Leaderboard - Cyber Awareness Month
+{% endblock %}
+
+
+{% block content %}
+
+<section class="leaderboard-page">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">
+            CYBER CHAMPIONSHIP
+        </span>
+
+        <h1>
+            🏆 Leaderboard
+        </h1>
+
+        <p>
+            See how participants are progressing through the
+            Cyber Awareness Month challenges.
+        </p>
+
+    </div>
+
+
+    <div class="leaderboard-card">
+
+        {% if participants %}
+
+            {% for participant in participants %}
+
+                <div class="leaderboard-row">
+
+                    <div class="rank">
+
+                        {% if loop.index == 1 %}
+                            🥇
+                        {% elif loop.index == 2 %}
+                            🥈
+                        {% elif loop.index == 3 %}
+                            🥉
+                        {% else %}
+                            #{{ loop.index }}
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="participant-info">
+
+                        <strong>
+                            {{ participant.full_name }}
+                        </strong>
+
+                        <span>
+                            {{ participant.participant_type }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="leaderboard-points">
+
+                        <strong>
+                            {{ participant.points }}
+                        </strong>
+
+                        <span>
+                            points
+                        </span>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <span>
+                    🏆
+                </span>
+
+                <h3>
+                    No participants yet
+                </h3>
+
+                <p>
+                    Be the first person to join the challenge.
+                </p>
+
+                <a
+                    href="{{ url_for('register') }}"
+                    class="button primary"
+                >
+                    Join Now
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
