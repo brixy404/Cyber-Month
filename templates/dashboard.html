@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Dashboard - Cyber Awareness Month
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-header">
+
+    <div>
+
+        <span class="eyebrow">
+            PARTICIPANT DASHBOARD
+        </span>
+
+        <h1>
+            Welcome, {{ current_user.full_name.split()[0] }} 👋
+        </h1>
+
+        <p>
+            Your Cyber Awareness Month journey starts here.
+        </p>
+
+    </div>
+
+
+    <div class="points-card">
+
+        <span>
+            YOUR POINTS
+        </span>
+
+        <strong>
+            {{ current_user.points }}
+        </strong>
+
+        <small>
+            points
+        </small>
+
+    </div>
+
+</section>
+
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+
+        <span class="stat-icon">
+            🎯
+        </span>
+
+        <div>
+
+            <strong>
+                {{ completed_count }}/{{ total_missions }}
+            </strong>
+
+            <span>
+                Missions completed
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span class="stat-icon">
+            📈
+        </span>
+
+        <div>
+
+            <strong>
+                {{ progress }}%
+            </strong>
+
+            <span>
+                Overall progress
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span class="stat-icon">
+            🏆
+        </span>
+
+        <div>
+
+            <strong>
+                {{ current_user.points }}
+            </strong>
+
+            <span>
+                Total points
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="progress-section">
+
+    <div class="progress-header">
+
+        <div>
+
+            <span class="eyebrow">
+                YOUR JOURNEY
+            </span>
+
+            <h2>
+                Mission progress
+            </h2>
+
+        </div>
+
+        <strong>
+            {{ progress }}%
+        </strong>
+
+    </div>
+
+
+    <div class="progress-bar">
+
+      <div
+    class="progress-fill"
+    style="--progress-width: {{ progress }}%;"
+        ></div>
+    </div>
+
+</section>
+
+
+<section class="section dashboard-missions">
+
+    <div class="section-heading left">
+
+        <span class="eyebrow">
+            MISSIONS
+        </span>
+
+        <h2>
+            Choose your next challenge
+        </h2>
+
+    </div>
+
+
+    <div class="mission-grid">
+
+        {% for mission in missions %}
+
+            <article
+                class="
+                    mission-card
+                    {% if mission.id in completed_mission_ids %}
+                        completed
+                    {% endif %}
+                "
+            >
+
+                <div class="mission-icon">
+                    {{ mission.icon }}
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        {{ mission.name }}
+                    </h3>
+
+                    <p>
+                        {{ mission.description }}
+                    </p>
+
+                </div>
+
+
+                <div class="mission-footer">
+
+                    <span>
+                        {{ mission.points }} points
+                    </span>
+
+
+                    {% if mission.id in completed_mission_ids %}
+
+                        <span class="completed-label">
+                            ✓ Completed
+                        </span>
+
+                    {% else %}
+
+                        <a
+                            href="{{ url_for('mission', slug=mission.slug) }}"
+                            class="mission-button"
+                        >
+                            Explore →
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+{% if selected_mission %}
+
+<section class="mission-preview">
+
+    <div class="preview-content">
+
+        <span class="preview-icon">
+            {{ selected_mission.icon }}
+        </span>
+
+        <div>
+
+            <span class="eyebrow">
+                MISSION
+            </span>
+
+            <h2>
+                {{ selected_mission.name }}
+            </h2>
+
+            <p>
+                {{ selected_mission.description }}
+            </p>
+
+            <div class="coming-soon">
+                🚧 Interactive challenge coming in the next stage.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+{% endblock %}
